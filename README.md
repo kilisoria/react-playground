@@ -1,2 +1,2 @@
-# react-playground
+# React Playground
 Testing React things.
