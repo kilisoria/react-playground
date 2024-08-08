@@ -1,9 +1,13 @@
-import { useEffect, useLayoutEffect, useInsertionEffect } from 'react';
+import { useEffect, useLayoutEffect, useInsertionEffect, useState, useCallback } from 'react';
+
+import { Button } from '@mui/material';
 
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [value, setValue] = useState(0);
+
   useLayoutEffect(() => {
     console.log('Hi useLayoutEffect');
   }, []);
@@ -13,7 +17,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('Hi useEffect');
+    console.log('this is useEffect');
+  }, []);
+
+    const handleOnClick = () => {
+      setValue(value + 1);
+    };
+  
+  const handleOnSecondClick = useCallback(() => {
+    return new Date().getMilliseconds();
   }, []);
    
   return (
@@ -23,6 +35,9 @@ function App() {
         <p>
           Playing...
         </p>
+        <p>{`Count: ${value}`}</p>
+        <Button variant="text" color="info" onClick={handleOnClick}>Increment</Button>
+        <Button variant="outlined" color="info" onClick={handleOnSecondClick}>confirm</Button>
         {/* <a
           className="App-link"
           href="https://reactjs.org"
